@@ -20,7 +20,7 @@ prefetch 기능에 의해 캐시에 리소스가 저장될 때 리소스 각각�
 // vue.config.js
 module.exports = {
   chainWebpack: config => {
-    config.plugins.delete('prefetch');
+    config.plugins.delete('prefetch')
   }
 }
 ```
@@ -39,28 +39,29 @@ import(/* webpackPrefetch: true */ 'vue 파일명')
   <div></div>
 </template>
 <script>
-  export default {
-    name: '',
-    components: {},
-    data(){
-      return {
-        sampleData: ''
-      };
-    },
-    setup() {},
-    created() {
-      // 컴포넌트 인스턴스가 생성된 후 호출
-      // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
-    },
-    mounted() {
-      // 컴포넌트 인스턴트가 마운트된 후 호출
-      // 화면 내용이 랜더링된 후에 호출
-      // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
-    },
-    unmounted() {
-      // 컴포넌트 인스턴트가 마운트 해제된 후 호출
-    },
-    methods: {}
-  }
+export default {
+  name: '',
+  components: {},
+  data() {
+    return {
+      sampleData: ''
+    }
+  },
+  setup() {},
+  created() {
+    // 컴포넌트 인스턴스가 생성된 후 호출
+    // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
+  },
+  mounted() {
+    // 컴포넌트 인스턴트가 마운트된 후 호출
+    // 화면 내용이 랜더링된 후에 호출
+    // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
+  },
+  unmounted() {
+    // 컴포넌트 인스턴트가 마운트 해제된 후 호출
+  },
+  methods: {}
+}
 </script>
+
 ```
