@@ -1,5 +1,5 @@
 FROM node:lts-alpine
 WORKDIR /app
 COPY . .
-CMD npm install && npm run serve
+CMD npm install && tail -f /dev/null
 EXPOSE 8080
