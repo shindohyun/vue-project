@@ -1,7 +1,3 @@
-# Setup
-## VSCode Extensions
-- Vetur
-
 # Learning
 ## Lazy Load
 Vue는 빌드 후 모든 소스 코드가 하나의 파일로 생성되고, 첫 접속 시 파일에 포함된 리소스 및 컴포넌트가 전부 로드된다.
@@ -36,3 +32,35 @@ import(/* webpackPrefetch: true */ 'vue 파일명')
 - 일반적: 사용자의 접속 빈도가 높은 컴포넌트
 - 지연로드: 사용자의 접속 빈도가 낮은 컴포넌트
 - 지연로드 prefetch: 지연로드 컴포넌트 중에서 사용하는 리소스가 큰 컴포넌트
+
+## Vue Base Code
+```
+<template>
+  <div></div>
+</template>
+<script>
+  export default {
+    name: '',
+    components: {},
+    data(){
+      return {
+        sampleData: ''
+      };
+    },
+    setup() {},
+    created() {
+      // 컴포넌트 인스턴스가 생성된 후 호출
+      // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
+    },
+    mounted() {
+      // 컴포넌트 인스턴트가 마운트된 후 호출
+      // 화면 내용이 랜더링된 후에 호출
+      // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
+    },
+    unmounted() {
+      // 컴포넌트 인스턴트가 마운트 해제된 후 호출
+    },
+    methods: {}
+  }
+</script>
+```
