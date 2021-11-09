@@ -26,6 +26,9 @@
   <input @keyup.enter="submit" placeholder="enter event"/>
   <input @keyup.delete="backspace" placeholder="delete event"/>
   <div @click.shift="shiftClick">shift + click event</div>
+  <h1>Computed Full Name: {{computedFullName}}</h1>
+  <h1>Watch Full Name: {{fullName}}</h1>
+  <button @click="changeFirstName">Change First Name</button>
 </template>
 <script>
 export default {
@@ -41,7 +44,23 @@ export default {
         height: '50px'
       },
       activeStyle: 'background-color: yellow; font-weight: bold',
-      errorStyle: 'color: red;'
+      errorStyle: 'color: red;',
+      firstName: 'dohyun',
+      lastName: 'shin',
+      fullName: ''
+    }
+  },
+  computed: {
+    computedFullName() {
+      return this.firstName + ' ' + this.lastName
+    }
+  },
+  watch: {
+    firstName() {
+      this.fullName = this.firstName + ' ' + this.lastName
+    },
+    lastName() {
+      this.fullName = this.firstName + ' ' + this.lastName
     }
   },
   methods: {
@@ -59,6 +78,9 @@ export default {
     },
     shiftClick() {
       alert('shift + click')
+    },
+    changeFirstName() {
+      this.firstName = this.firstName.split('').reverse().join('')
     }
   }
 }
