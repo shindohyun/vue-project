@@ -22,6 +22,10 @@
     v-bind:style="[
       containerStyle, activeStyle, errorStyle
     ]">Style Binding</div>
+  <button @click="two(), one()">Click</button>
+  <input @keyup.enter="submit" placeholder="enter event"/>
+  <input @keyup.delete="backspace" placeholder="delete event"/>
+  <div @click.shift="shiftClick">shift + click event</div>
 </template>
 <script>
 export default {
@@ -38,6 +42,23 @@ export default {
       },
       activeStyle: 'background-color: yellow; font-weight: bold',
       errorStyle: 'color: red;'
+    }
+  },
+  methods: {
+    one() {
+      alert('one')
+    },
+    two() {
+      alert('two')
+    },
+    submit() {
+      alert('submit')
+    },
+    backspace() {
+      alert('backspace')
+    },
+    shiftClick() {
+      alert('shift + click')
     }
   }
 }
