@@ -29,6 +29,24 @@
   <h1>Computed Full Name: {{computedFullName}}</h1>
   <h1>Watch Full Name: {{fullName}}</h1>
   <button @click="changeFirstName">Change First Name</button>
+  <table>
+    <thead>
+      <tr>
+        <th>제품명</th>
+        <th>가격</th>
+        <th>카테고리</th>
+        <th>배송료</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(product, index) in productList" v-bind:key="index">
+        <td>{{product.product_name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.category}}</td>
+        <td>{{product.delivery_price}}</td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 <script>
 export default {
@@ -47,8 +65,12 @@ export default {
       errorStyle: 'color: red;',
       firstName: 'dohyun',
       lastName: 'shin',
-      fullName: ''
+      fullName: '',
+      productList: []
     }
+  },
+  created() {
+    this.getList()
   },
   computed: {
     computedFullName() {
@@ -81,6 +103,9 @@ export default {
     },
     changeFirstName() {
       this.firstName = this.firstName.split('').reverse().join('')
+    },
+    async getList() {
+      this.productList = await this.$api('https://a14071f4-dff0-4a20-9343-a1c775d7f9c4.mock.pstmn.io/list', 'get')
     }
   }
 }
