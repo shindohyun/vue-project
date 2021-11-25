@@ -65,6 +65,7 @@ export default {
 </script>
 
 ```
+- VSCode Vue Base Code Snippets 설정 방법: `Code > Preference > User Snippets > vue.json`
 
 ## `v-if` vs `v-show`
 - `v-if`  
