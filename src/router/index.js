@@ -4,6 +4,8 @@ import DataBinding from '../views/DataBinding.vue'
 import NestedComponent from '../views/NestedComponent.vue'
 import ParentComponent from '../views/ParentComponent.vue'
 import ProvideInject from '../views/ProvideInject.vue'
+import OptionsApi from '../views/OptionsApi'
+import CompositionApi from '../views/CompositionApi'
 
 const routes = [
   {
@@ -38,6 +40,16 @@ const routes = [
     path: '/provide-inject',
     name: 'ProvideInject',
     component: ProvideInject
+  },
+  {
+    path: '/options-api',
+    name: 'OptionsApi',
+    component: OptionsApi
+  },
+  {
+    path: '/composition-api',
+    name: 'CompositionApi',
+    component: CompositionApi
   }
 ]
 
