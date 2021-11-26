@@ -32,12 +32,18 @@
   </div>
 </template>
 <script>
-import { reactive, computed } from 'vue'
+import { reactive, computed, onMounted, onUnmounted } from 'vue'
 import { externalPlusCalculator } from '../common.js'
 
 export default {
   name: 'calculator',
   setup() {
+    onMounted(() => {
+      console.log('onMounted')
+    })
+    onUnmounted(() => {
+      console.log('onUnmounted')
+    })
     const state = reactive({
       num1: 0,
       num2: 0,
