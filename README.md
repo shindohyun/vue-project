@@ -44,11 +44,6 @@ import { onMounted, onUnmounted } from 'vue'
 export default {
   name: '',
   components: {},
-  data() {
-    return {
-      sampleData: ''
-    }
-  },
   setup() {
     onMounted(() => {
       // 컴포넌트 인스턴트가 마운트된 후 호출
@@ -63,8 +58,7 @@ export default {
     // 컴포넌트 인스턴스가 생성된 후 호출
     // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
     // Composition API 에서 beforeCreate, created hook을 지원하지 않음
-  },
-  methods: {}
+  }
 }
 </script>
 
