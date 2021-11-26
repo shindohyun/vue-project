@@ -6,6 +6,7 @@ import ParentComponent from '../views/ParentComponent.vue'
 import ProvideInject from '../views/ProvideInject.vue'
 import OptionsApi from '../views/OptionsApi'
 import CompositionApi from '../views/CompositionApi'
+import CompositionApiProvide from '../views/CompositionApiProvide'
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     path: '/composition-api',
     name: 'CompositionApi',
     component: CompositionApi
+  },
+  {
+    path: '/composition-api-provide',
+    name: 'CompositionApiProvide',
+    component: CompositionApiProvide
   }
 ]
 
