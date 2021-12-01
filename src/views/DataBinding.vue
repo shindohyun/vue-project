@@ -49,7 +49,12 @@
   </table>
 </template>
 <script>
+import lifecycle from '../mixins/lifecycle'
+
 export default {
+  mixins: [
+    lifecycle
+  ],
   data() {
     return {
       isActive: true,
@@ -71,6 +76,12 @@ export default {
   },
   created() {
     this.getList()
+  },
+  mounted() {
+    console.log('component mounted')
+  },
+  unmounted() {
+    console.log('component unmounted')
   },
   computed: {
     computedFullName() {

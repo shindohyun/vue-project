@@ -2,10 +2,10 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import mixins from './mixins'
+import api from './mixins/api'
 
 const app = createApp(App)
 app.use(store)
 app.use(router)
-app.mixin(mixins)
+app.mixin(api)
 app.mount('#app')
