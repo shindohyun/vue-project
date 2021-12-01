@@ -48,11 +48,16 @@
     </tbody>
   </table>
   <p v-pin="position">Custom Local Directive Test (position:fixed;top:50px;left:100px;)</p>
+  <using-plugin/>
 </template>
 <script>
 import lifecycle from '../mixins/lifecycle'
+import UsingPlugin from './UsingPlugin'
 
 export default {
+  components: {
+    UsingPlugin
+  },
   mixins: [
     lifecycle
   ],

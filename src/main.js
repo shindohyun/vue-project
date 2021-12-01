@@ -3,14 +3,25 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import api from './mixins/api'
+import i18nPlugin from './plugins/i18n'
+
+const i18nStrings = {
+  en: {
+    hi: 'Hello'
+  },
+  ko: {
+    hi: '안녕하세요'
+  }
+}
 
 const app = createApp(App)
 app.use(store)
 app.use(router)
 app.mixin(api)
-app.mount('#app')
 app.directive('focus', {
   mounted(el) {
     el.focus()
   }
 })
+app.use(i18nPlugin, i18nStrings)
+app.mount('#app')
