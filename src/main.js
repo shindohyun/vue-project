@@ -9,3 +9,8 @@ app.use(store)
 app.use(router)
 app.mixin(api)
 app.mount('#app')
+app.directive('focus', {
+  mounted(el) {
+    el.focus()
+  }
+})

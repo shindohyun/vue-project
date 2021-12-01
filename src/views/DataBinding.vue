@@ -23,7 +23,7 @@
       containerStyle, activeStyle, errorStyle
     ]">Style Binding</div>
   <button @click="two(), one()">Click</button>
-  <input @keyup.enter="submit" placeholder="enter event"/>
+  <input @keyup.enter="submit" placeholder="enter event" v-focus/>
   <input @keyup.delete="backspace" placeholder="delete event"/>
   <div @click.shift="shiftClick">shift + click event</div>
   <h1>Computed Full Name: {{computedFullName}}</h1>
@@ -47,6 +47,7 @@
       </tr>
     </tbody>
   </table>
+  <p v-pin="position">Custom Local Directive Test (position:fixed;top:50px;left:100px;)</p>
 </template>
 <script>
 import lifecycle from '../mixins/lifecycle'
@@ -55,6 +56,15 @@ export default {
   mixins: [
     lifecycle
   ],
+  directives: {
+    pin: {
+      mounted(el, binding) {
+        el.style.position = 'fixed'
+        el.style.top = binding.value.top + 'px'
+        el.style.left = binding.value.left + 'px'
+      }
+    }
+  },
   data() {
     return {
       isActive: true,
@@ -71,7 +81,11 @@ export default {
       firstName: 'dohyun',
       lastName: 'shin',
       fullName: '',
-      productList: []
+      productList: [],
+      position: {
+        top: 50,
+        left: 100
+      }
     }
   },
   created() {
