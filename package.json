@@ -48,7 +48,14 @@
         "error",
         "never"
       ],
-      "no-debugger": "off"
+      "no-debugger": "off",
+      "no-trailing-spaces": [
+        "error",
+        { 
+          "skipBlankLines": true, 
+          "ignoreComments": true
+        }
+      ]
     }
   },
   "browserslist": [
