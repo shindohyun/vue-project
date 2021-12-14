@@ -25,3 +25,5 @@ app.directive('focus', {
 })
 app.use(i18nPlugin, i18nStrings)
 app.mount('#app')
+
+window.Kakao.init('bb694b403f11ddda8cbc05210dbf8cf4')

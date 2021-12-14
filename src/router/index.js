@@ -8,6 +8,7 @@ import OptionsApi from '../views/OptionsApi'
 import CompositionApi from '../views/CompositionApi'
 import CompositionApiProvide from '../views/CompositionApiProvide'
 import StoreAccess from '../views/StoreAccess'
+import KakaoLogin from '../views/KakaoLogin'
 
 const routes = [
   {
@@ -62,6 +63,16 @@ const routes = [
     path: '/store-access',
     name: 'StoreAccess',
     component: StoreAccess
+  },
+  {
+    path: '/kakaologin',
+    name: 'KakaoLogin',
+    component: KakaoLogin
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: Home
   }
 ]
 
