@@ -10,6 +10,7 @@ import CompositionApiProvide from '../views/CompositionApiProvide'
 import StoreAccess from '../views/StoreAccess'
 import KakaoLogin from '../views/KakaoLogin'
 import NaverLogin from '../views/NaverLogin'
+import GoogleLogin from '../views/GoogleLogin'
 
 const routes = [
   {
@@ -79,6 +80,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Home
+  },
+  {
+    path: '/googlelogin',
+    name: 'GoogleLogin',
+    component: GoogleLogin
   }
 ]
 

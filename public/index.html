@@ -16,6 +16,19 @@
     <!-- naver id login js sdk -->
     <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
 
+    <!-- google oauth2.0 client id -->
+    <meta name="google-signin-client_id" content="710869476835-ittabag3aekt0e35egi7uemuost9d1qn.apps.googleusercontent.com">
+    <!-- google library loaded trigger: 구글 라이브러리가 늦게 로드되는 문제 해결을 위함
+      구글 라이브러리가 mounted 시점 보다 늦게 로드되는 경우 
+      mounted 시점에 구글 로그인 버튼 렌더링 시 에러가 발생하는 문제 발생-->
+    <script type="text/javascript">
+      function triggerGoogleLoaded() {
+        window.dispatchEvent(new Event("google-loaded"))
+      }
+    </script>
+    <!-- google platform js library: 위에서 정의한 로드 트리거 등록 -->
+    <script src="https://apis.google.com/js/platform.js?onload=triggerGoogleLoaded" async defer></script>
+
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
