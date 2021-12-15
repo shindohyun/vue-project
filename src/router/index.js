@@ -9,6 +9,7 @@ import CompositionApi from '../views/CompositionApi'
 import CompositionApiProvide from '../views/CompositionApiProvide'
 import StoreAccess from '../views/StoreAccess'
 import KakaoLogin from '../views/KakaoLogin'
+import NaverLogin from '../views/NaverLogin'
 
 const routes = [
   {
@@ -68,6 +69,11 @@ const routes = [
     path: '/kakaologin',
     name: 'KakaoLogin',
     component: KakaoLogin
+  },
+  {
+    path: '/naverlogin',
+    name: 'NaverLogin',
+    component: NaverLogin
   },
   {
     path: '/login',
