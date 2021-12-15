@@ -55,6 +55,10 @@
           "skipBlankLines": true, 
           "ignoreComments": true
         }
+      ],
+      "quotes": [
+        "off",
+        "single"
       ]
     }
   },
