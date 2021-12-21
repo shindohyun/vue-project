@@ -7,12 +7,21 @@
   <input v-model="name" placeholder="사용자 이름 입력"/>
   <button type="button" @click="saveUser">사용자 object 저장</button>
   <p>{{ $store.state.user }}</p>
+  <br>
+  <input v-model="data1" placeholder="지속적인 데이터">
+  <button type="button" @click="saveData1">저장</button>
+  <p>{{ $store.state.persistedstatetest.persistedData }}</p>
+  <input v-model="data2" placeholder="비지속적인 데이터">
+  <button type="button" @click="saveData2">저장</button>
+  <p>{{ $store.state.persistedstatetest.unpersistedData }}</p>
 </template>
 <script>
 export default {
   data() {
     return {
-      name: ''
+      name: '',
+      data1: 0,
+      data2: 0
     }
   },
   computed: {
@@ -32,6 +41,12 @@ export default {
     },
     saveUser() {
       this.$store.commit('user/user', { name: this.name })
+    },
+    saveData1() {
+      this.$store.commit('persistedstatetest/persistedData', this.data1)
+    },
+    saveData2() {
+      this.$store.commit('persistedstatetest/unpersistedData', this.data2)
     }
   }
 }
