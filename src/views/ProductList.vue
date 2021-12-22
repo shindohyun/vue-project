@@ -1,26 +1,62 @@
 <template>
-  <div></div>
+  <main class="mt-3">
+    <div class="container">
+      <div class="row mb-2">
+        <div class="col-12">
+          <select class="form-select">
+            <option selected></option>
+            <option value="1">노트북</option>
+            <option value="2">모니터</option>
+            <option value="3">마우스/키보드</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-4 col-md-6" :key="i" v-for="(product, i) in productList">
+          <div class="card" style="width: 18rem;">
+            <a @click="goToDetail(product.id)" style="cursor: pointer;">
+              <img :src="'/download/${product.id}/${product.path}'" class="card-img-top" alt="...">
+            </a>
+            <div class="card-body">
+              <h5 class="card-title">{{product.product_name}}</h5>
+              <p class="card-text">
+                <span class="badge bg-dark text-white mr-1">{{product.category1}}</span>
+                <span class="badge bg-dark text-white mr-1">{{product.category2}}</span>
+                <span class="badge bg-dark text-white">{{product.category3}}</span>
+              </p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">장바구니 담기</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">주문하기</button>
+                </div>
+                <small class="text-dark">{{product.product_price}}원</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 <script>
-import { onMounted, onUnmounted } from 'vue'
-
 export default {
-  name: '',
-  components: {},
-  setup() {
-    onMounted(() => {
-      // 컴포넌트 인스턴트가 마운트된 후 호출
-      // 화면 내용이 랜더링된 후에 호출
-      // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
-    })
-    onUnmounted(() => {
-      // 컴포넌트 인스턴트가 마운트 해제된 후 호출
-    })
+  name: 'ProductList',
+  data() {
+    return {
+      productList: []
+    }
   },
   created() {
-    // 컴포넌트 인스턴스가 생성된 후 호출
-    // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
-    // Composition API 에서 beforeCreate, created hook을 지원하지 않음
+    this.getProductList()
+  },
+  methods: {
+    async getProductList() {
+      this.productList = await this.$post("/api/productList", {})
+      console.log(this.productList)
+    },
+    goToDetail(productId) {
+      this.$router.push({ path: '/detail', query: { product_id: productId } })
+    }
   }
 }
 </script>
