@@ -1,26 +1,80 @@
 <template>
-  <div></div>
+  <main class="mt-3">
+    <div class="container">
+      <div class="float-end mb-1">
+        <button type="button" class="btn btn-dark" @click="goToInsert">제품등록</button>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th></th>
+            <th>제품명</th>
+            <th>제품가격</th>
+            <th>배송비</th>
+            <th>추가 배송비</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr :key="i" v-for="(product, i) in productList">
+            <td>
+              <img v-if="product.path != null" :src="`/download/${product.id}/${product.path}`" style="height: 50px; width: auto;" />
+            </td>
+            <td>{{product.product_name}}</td>
+            <td>{{product.product_price}}</td>
+            <td>{{product.delivery_price}}</td>
+            <td>{{product.add_delivery_price}}</td>
+            <td>
+              <button type="button" class="btn btn-info me-1" @click="goToImageInsert(product.id)">사진등록</button>
+              <button type="button" class="btn btn-warning me-1" @click="goToUpdate(product.id)">수정</button>
+              <button type="button" class="btn btn-danger" @click="deleteProduct(product.id)">삭제</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
 </template>
 <script>
-import { onMounted, onUnmounted } from 'vue'
 
 export default {
-  name: '',
-  components: {},
-  setup() {
-    onMounted(() => {
-      // 컴포넌트 인스턴트가 마운트된 후 호출
-      // 화면 내용이 랜더링된 후에 호출
-      // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
-    })
-    onUnmounted(() => {
-      // 컴포넌트 인스턴트가 마운트 해제된 후 호출
-    })
+  data() {
+    return {
+      productList: []
+    }
   },
-  created() {
-    // 컴포넌트 인스턴스가 생성된 후 호출
-    // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
-    // Composition API 에서 beforeCreate, created hook을 지원하지 않음
+  methods: {
+    async getProductList() {
+      this.productList = await this.$post("/api/productList2", {})
+      console.log(this.productList)
+    },
+    goToInsert() {
+      this.$router.push({ path: '/create' })
+    },
+    goToDetail(productId) {
+      this.$router.push({ path: '/detail', query: { product_id: productId } })
+    },
+    goToUpdate(productId) {
+      this.$router.push({ path: '/update', query: { product_id: productId } })
+    },
+    goToImageInsert(productId) {
+      this.$router.push({ path: '/image_insert', query: { product_id: productId } })
+    },
+    deleteProduct(productId) {
+      this.$swal.fire({
+        title: '정말 삭제하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonText: '삭제',
+        cancelButtonText: '취소'
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          console.log(productId)
+          await this.$post('/api/productDelete', { param: [productId] })
+          this.getProductList()
+          this.$swal.fire('삭제되었습니다!', '', 'success')
+        }
+      })
+    }
   }
 }
 </script>

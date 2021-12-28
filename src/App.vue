@@ -14,11 +14,11 @@ export default {
   components: {
     Header,
     Footer
+  },
+  computed: {
+    user() {
+      return this.$store.state.user.user
+    }
   }
-  // computed: {
-  //   user() {
-  //     return this.$store.state.user
-  //   }
-  // }
 }
 </script>

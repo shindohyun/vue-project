@@ -5,6 +5,8 @@ import store from './store'
 import api from './mixins/api'
 import mixins from './mixins/mixins'
 import i18nPlugin from './plugins/i18n'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
 
 const i18nStrings = {
   en: {
@@ -20,6 +22,7 @@ app.use(store)
 app.use(router)
 app.mixin(api)
 app.mixin(mixins)
+app.use(VueSweetalert2)
 app.directive('focus', {
   mounted(el) {
     el.focus()

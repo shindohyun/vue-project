@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vue-sweetalert2": "^5.0.2",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0"
   },
@@ -51,8 +52,8 @@
       "no-debugger": "off",
       "no-trailing-spaces": [
         "error",
-        { 
-          "skipBlankLines": true, 
+        {
+          "skipBlankLines": true,
           "ignoreComments": true
         }
       ],

@@ -1,26 +1,234 @@
 <template>
-  <div></div>
+  <main class="mt-3">
+    <div class="container">
+      <h2 class="text-center">제품 등록</h2>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">제품명</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" v-model="product.product_name">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">제품가격</label>
+        <div class="col-md-9">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" v-model="product.product_price">
+            <span class="input-group-text">원</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">배송비</label>
+        <div class="col-md-9">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" v-model="product.delivery_price">
+            <span class="input-group-text">원</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">추가배송비(도서산간)</label>
+        <div class="col-md-9">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" v-model="product.add_delivery_price">
+            <span class="input-group-text">원</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">제품카테고리</label>
+        <div class="col-md-9">
+          <div class="row">
+            <div class="col-auto">
+              <select class="form-select" v-model="cate1" @change="changeCategory1">
+                <option :value="cate" :key="i" v-for="(cate, i) in category1">{{cate}}</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <select class="form-select" v-model="cate2" @change="changeCategory2">
+                <option :value="cate" :key="i" v-for="(cate, i) in category2">{{cate}}</option>
+              </select>
+            </div>
+            <div class="col-auto">
+              <select class="form-select" v-model="cate3">
+                <option :value="cate" :key="i" v-for="(cate, i) in category3">{{cate}}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">태그</label>
+        <div class="col-md-9">
+          <input type="text" class="form-control" v-model="product.tags">
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-3 col-form-label">출고일</label>
+        <div class="col-md-9">
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" v-model="product.outbound_days">
+            <span class="input-group-text">일 이내 출고</span>
+          </div>
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <div class="col-6 d-grid p-1">
+          <button type="button" class="btn btn-lg btn-dark" @click="goToList">취소하기</button>
+        </div>
+        <div class="col-6 d-grid p-1">
+          <button type="button" class="btn btn-lg btn-danger" @click="productInsert">저장하기</button>
+        </div>
+      </div>
+    </div>
+  </main>
 </template>
 <script>
-import { onMounted, onUnmounted } from 'vue'
 
 export default {
-  name: '',
-  components: {},
-  setup() {
-    onMounted(() => {
-      // 컴포넌트 인스턴트가 마운트된 후 호출
-      // 화면 내용이 랜더링된 후에 호출
-      // tip. 화면 로딩 이후에 출력되어도 되는 데이터 또는 HTML 객체 부분을 획득하는 구간으로 사용
-    })
-    onUnmounted(() => {
-      // 컴포넌트 인스턴트가 마운트 해제된 후 호출
-    })
+  data() {
+    return {
+      product: {
+        product_name: "",
+        product_price: 0,
+        delivery_price: 0,
+        add_delivery_price: 0,
+        tags: '',
+        outbound_days: 0,
+        category_id: 1,
+        seller_id: 1
+      },
+      categoryList: [],
+      category1: [],
+      category2: [],
+      category3: [],
+      cate1: '',
+      cate2: '',
+      cate3: ''
+    }
   },
-  created() {
-    // 컴포넌트 인스턴스가 생성된 후 호출
-    // tip. 해당 컴포넌트에서 가장 먼저 보여줘야 하는 데이터를 획득하는 구간으로 사용
-    // Composition API 에서 beforeCreate, created hook을 지원하지 않음
+  computed: {
+    user() {
+      return this.$store.state.user.user
+    }
+  },
+  create() {
+    this.getCategoryList()
+  },
+  mounted() {
+    if (this.user.email === undefined) {
+      alert('로그인을 해야 이용할 수 있습니다.')
+      this.$router.push({ path: '/' })
+    }
+  },
+  methods: {
+    goToList() {
+      this.$router.push({ path: '/sales' })
+    },
+    async getCategoryList() {
+      const categoryList = await this.$post('/api/categoryList', {})
+      this.categoryList = categoryList
+
+      const oCategory = {}
+      categoryList.forEach(item => {
+        oCategory[item.category1] = item.id
+      })
+
+      const category1 = []
+      for (const key in oCategory) {
+        category1.push(key)
+      }
+      this.category1 = category1
+
+      let category2 = []
+      category2 = categoryList.filter(c => {
+        return c.category1 === category1[0]
+      })
+
+      const oCategory2 = {}
+      category2.forEach(item => {
+        oCategory2[item.category2] = item.id
+      })
+
+      category2 = []
+      for (const key in oCategory2) {
+        category2.push(key)
+      }
+
+      this.category2 = category2
+      console.log(category2)
+    },
+    changeCategory1() {
+      this.cateogry3 = []
+      const categoryList = this.categoryList.filter(c => {
+        return c.category1 === this.cate1
+      })
+
+      const oCategory2 = {}
+      categoryList.forEach(item => {
+        oCategory2[item.category2] = item.id
+      })
+
+      const category2 = []
+      for (const key in oCategory2) {
+        category2.push(key)
+      }
+
+      this.category2 = category2
+    },
+    changeCategory2() {
+      const categoryList = this.categoryList.filter(c => {
+        return (c.category1 === this.cate1 && c.category2 === this.cate2)
+      })
+
+      const oCategory3 = {}
+      categoryList.forEach(item => {
+        oCategory3[item.category3] = item.id
+      })
+
+      const category3 = []
+      for (const key in oCategory3) {
+        category3.push(key)
+      }
+
+      this.category3 = category3
+    },
+    productInsert() {
+      if (this.product.product_name === '') {
+        return this.$swal('제품명은 필수 입력값입니다.')
+      }
+
+      if (this.product.product_price === '' || this.product.product_price === 0) {
+        return this.$swal('제품 가격을 입력하세요.')
+      }
+
+      if (this.product.delivery_price === '' || this.product.delivery_price === 0) {
+        return this.$swal('배송료를 입력하세요.')
+      }
+
+      if (this.product.outbound_days === '' || this.product.outbound_days === 0) {
+        return this.$swal('출고일을 입력하세요.')
+      }
+
+      this.product.category_id = this.categoryList.filter(c => {
+        return (c.category1 === this.cate1 && c.category2 === this.cate2 && c.category3 === this.cate3)
+      })[0].id
+
+      console.log(this.product.category_id)
+
+      this.$swal.fire({
+        title: '정말 등록 하시겠습니까?',
+        showCancelButton: true,
+        confirmButtonText: '생성',
+        cancelButtonText: '취소'
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          await this.$post('/api/productInsert', { param: [this.product] })
+          this.$swal.fire('저장되었습니다!', '', 'success')
+          this.$router.push({ path: '/sales' })
+        }
+      })
+    }
   }
 }
 </script>
