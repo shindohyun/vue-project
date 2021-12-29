@@ -112,7 +112,7 @@ export default {
       return this.$store.state.user.user
     }
   },
-  create() {
+  created() {
     this.getCategoryList()
   },
   mounted() {
