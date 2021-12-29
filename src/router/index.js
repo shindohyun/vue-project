@@ -22,7 +22,7 @@ import GoogleLogin from '../views/GoogleLogin'
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'ProductList',
     component: ProductList
   },
   {

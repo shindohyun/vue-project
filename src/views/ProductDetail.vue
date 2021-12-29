@@ -11,7 +11,7 @@
             </ol>
             <div class="carousel-inner">
               <div :class="`carousel-item ${i == 0 ? 'active' : ''}`" :key="i" v-for="(pimg, i) in productImage">
-                <img :src="`/download/${productId}/${pimg.path}`" class="d-block w-100" alt="...">
+                <img :src="`http://localhost:3000/download/${productId}/${pimg.path}`" class="d-block w-100" alt="...">
               </div>
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
@@ -75,7 +75,7 @@
       </div>
       <div class="row">
         <div class="col-12">
-          <img :src="`/download/${productId}/${productDetail.path}`" class="img-fluid"/>
+          <img :src="`http://localhost:3000/download/${productId}/${productDetail.path}`" class="img-fluid"/>
         </div>
       </div>
     </div>
