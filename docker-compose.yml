@@ -2,14 +2,18 @@ version: "3.8"
 
 services:
   vue-project:
-    # build
-    image: vue-project:1.0
-    build: .
-
-    # run
-    image: vue-project:1.0
+    container_name: vue-project
+    image: vue-project
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - 8080:8080
     volumes:
       - .:/app
-    container_name: vue-project
+
+networks:
+  default:
+    external: true
+    name: default-network
+      
